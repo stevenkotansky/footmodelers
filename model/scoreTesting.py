@@ -4,7 +4,7 @@ from utils import *
 
 # %%
 # read in data
-folder_path = "/Users/nicolaskuntz/Documents/projects/football and betting projects/footmodelers/data/Week 1"
+folder_path = "../data/projections/Week 1"
 xlsx_files = [file for file in os.listdir(folder_path) if file.endswith(".xlsx")]
 dataframes = []
 
@@ -14,7 +14,7 @@ for xlsx_file in xlsx_files:
     dataframes.append(df)
 # %%
 week1_wScored = addActuals(
-    actualsPath='FantasyPros_Fantasy_Football_Points_PPR.csv',
+    actualsPath='../data/results/FantasyPros_Fantasy_Football_Points_PPR.csv',
     pred_df=dataframes[0],
     week='1'
 )
@@ -52,3 +52,5 @@ test_df['residual_score'] = test_df['predicted_tier'] - test_df['scored_tier']
 # Comment on results from option 1: This was expected but good to call out that residuals are much lower when the tierBreak is less strict, i.e. tiers of 6 have worse residuals than tiers of 12
 
 # %%
+# Save output to CSV
+test_df.to_csv("../output/week_1_test.csv", index=False)
